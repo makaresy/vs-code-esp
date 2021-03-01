@@ -1,0 +1,9 @@
+{
+	"folders": [],
+	"settings": {
+		"files.associations": {
+			"user_interface.h": "c",
+			"gpio.h": "c"
+		}
+	}
+}
