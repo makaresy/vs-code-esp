@@ -1,6 +1,8 @@
 #include "osapi.h"
 #include "user_interface.h"
 #include "driver/i2c_master.h"
+#include "driver/uart.h"
+
 
 static os_timer_t ptimer;
 
@@ -68,22 +70,26 @@ void blinky(void *arg)
 		GPIO_OUTPUT_SET(2, 0);
 	}
 	state ^= 1;
+     os_printf("Hello UART\n");
 }
 
 void ICACHE_FLASH_ATTR user_init(void)
 {
     gpio_init();
-    i2c_master_gpio_init();
-
+    uart_init(BIT_RATE_115200, BIT_RATE_115200);
+    wifi_set_opmode_current(STATION_MODE);
     uart_init(115200, 115200);
     os_printf("SDK version:%s\n", system_get_sdk_version());
 
     // Disable WiFi
-    	wifi_set_opmode(NULL_MODE);
+    	//wifi_set_opmode(NULL_MODE);
+        wifi_station_connect();
 
     PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2);
 
     os_timer_disarm(&ptimer);
     os_timer_setfn(&ptimer, (os_timer_func_t *)blinky, NULL);
     os_timer_arm(&ptimer, 2000, 1);
+
+   
 }
