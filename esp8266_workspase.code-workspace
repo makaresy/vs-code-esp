@@ -14,7 +14,22 @@
 	],
 	"settings": {
 		"files.associations": {
-			"uart.h": "c"
+			"uart.h": "c",
+			"gpio16.h": "c",
+			"osapi.h": "c",
+			"user_interface.h": "c",
+			"eagle_soc.h": "c",
+			"os_type.h": "c",
+			"ip_addr.h": "c",
+			"queue.h": "c",
+			"user_config.h": "c",
+			"spi_flash.h": "c",
+			"gpio.h": "c",
+			"ets_sys.h": "c",
+			"c_types.h": "c",
+			"uart_register.h": "c",
+			"i2c_master.h": "c",
+			"pwm.h": "c"
 		}
 	}
 }
