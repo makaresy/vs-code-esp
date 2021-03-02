@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "Test_project\\hello\\hello_world"
+		},
+		{
+			"path": "Test_project\\blink"
+		}
+	],
+	"settings": {}
+}

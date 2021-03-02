@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "esp8266nonrtos_ex"
+		},
+		{
+			"name": "blink_test",
+			"path": "esp8266\\blink_test"
+		},
+		{
+			"name": "blink2",
+			"path": "esp8266\\blink2\\blink2"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"uart.h": "c"
+		}
+	}
+}
