@@ -10,6 +10,10 @@
 		{
 			"name": "blink2",
 			"path": "esp8266\\blink2\\blink2"
+		},
+		{
+			"name": "wifi_sta",
+			"path": "esp8266\\wifi_sta"
 		}
 	],
 	"settings": {

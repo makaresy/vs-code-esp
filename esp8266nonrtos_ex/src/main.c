@@ -3,8 +3,7 @@
 #include "driver/i2c_master.h"
 #include "driver/uart.h"
 #include "../gpio.h"    //открывает файл который в лежит в сдк
-#include "gpio.h"       //открывает тот который создал я
-#include "pwm.h"
+//#include "gpio.h"       //открывает тот который создал я
 
 
 
@@ -70,9 +69,9 @@ void blinky(void *arg)
 	static uint8_t state = 0;
 
 	if (state) {
-		GPIO_OUTPUT_SET(16, 1);
+		GPIO_OUTPUT_SET(2, 1);
 	} else {
-		GPIO_OUTPUT_SET(16, 0);
+		GPIO_OUTPUT_SET(2, 0);
 	}
 	state ^= 1;
      os_printf("Hello UART\n");
@@ -85,10 +84,6 @@ void ICACHE_FLASH_ATTR user_init(void)
     wifi_set_opmode_current(STATION_MODE);
     uart_init(115200, 115200);
     os_printf("SDK version:%s\n", system_get_sdk_version());
-
-
-    
-
 
     // Disable WiFi
     	wifi_set_opmode(NULL_MODE);
