@@ -111,10 +111,10 @@ user_init(void)
     
     struct station_config stationConf;
     wifi_set_opmode_current(STATION_MODE);
-    os_memset(&stationConf, 0, sizeof(struct station_config));
-    os_sprintf(stationConf.ssid, "%s", WIFI_CLIENTSSID);
-    os_sprintf(stationConf.password, "%s", WIFI_CLIENTPASSWORD);
-    wifi_station_set_config_current(&stationConf);
+    os_memset(&stationConf, 0, sizeof(struct station_config));                  //заполнение структуры конфигурации нулями
+    os_sprintf(stationConf.ssid, "%s", WIFI_CLIENTSSID);                        //запись в структуру
+    os_sprintf(stationConf.password, "%s", WIFI_CLIENTPASSWORD);                //
+    wifi_station_set_config_current(&stationConf);                              //
     wifi_set_sleep_type(NONE_SLEEP_T);
     
     ets_delay_us(10000);

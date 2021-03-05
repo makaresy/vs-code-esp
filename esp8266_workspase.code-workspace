@@ -4,16 +4,16 @@
 			"path": "esp8266nonrtos_ex"
 		},
 		{
-			"name": "blink_test",
-			"path": "esp8266\\blink_test"
-		},
-		{
 			"name": "blink2",
 			"path": "esp8266\\blink2\\blink2"
 		},
 		{
 			"name": "wifi_sta",
 			"path": "esp8266\\wifi_sta"
+		},
+		{
+			"name": "wifi_sta_udp",
+			"path": "esp8266\\wifi_sta_udp"
 		}
 	],
 	"settings": {
@@ -33,7 +33,8 @@
 			"c_types.h": "c",
 			"uart_register.h": "c",
 			"i2c_master.h": "c",
-			"pwm.h": "c"
+			"pwm.h": "c",
+			"espconn.h": "c"
 		}
 	}
 }
