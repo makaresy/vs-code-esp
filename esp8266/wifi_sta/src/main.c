@@ -61,6 +61,7 @@ wifi_check_ip(void *arg){
     wifiStatus = wifi_station_get_connect_status();
     if (wifiStatus == STATION_GOT_IP && ipConfig.ip.addr != 0) 
     {
+        os_printf("wifi_station_dhcpc_status %d\n", wifi_station_dhcpc_status());
         os_timer_setfn(&ptimer, (os_timer_func_t*)wifi_check_ip, NULL);   
         os_timer_arm(&ptimer, 2000, 0);
     if (connectStatus == 0)

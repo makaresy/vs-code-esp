@@ -25,6 +25,27 @@ typedef enum{               //состояния подключения
     WIFI_CONNECTED
 }   tConnState;
 
+struct packets
+{
+    uint8_t LIVNMODE; 
+    uint8_t startum; 
+    uint8_t poll; 
+    uint8_t precision; 
+    uint32_t Root_Delay; 
+    uint32_t Root_Dispersion; 
+    uint32_t Ref_Identifier; 
+    uint32_t Ref_T; 
+    uint32_t Ref_Tp2; 
+    uint32_t Origin_T;  
+    uint32_t Origin_Tp2; 
+    uint32_t Receive_T; 
+    uint32_t Receive_Tp2; 
+    uint32_t T_T; 
+    uint32_t T_Tp2; 
+};
+
+struct packets message_send;
+
 static tConnState connState = WIFI_CONNECTING;
 
 struct espconn pConn;
@@ -92,7 +113,7 @@ udp_client_udp_recv_cb (void* arg, char* pusrdata, uint16_t length){
 static void ICACHE_FLASH_ATTR 
 udp_connect() {
     uint32_t ip;
-    char data[] = "foooooo ESP\r\n";
+    char data[] = "CIPSNTPTIME?";
     char udpserverip[15] = {};
 
     os_timer_disarm(&ptimer);
@@ -105,6 +126,7 @@ udp_connect() {
 
     os_memcpy(pConn.proto.udp->remote_ip, &ip, 4);
     pConn.proto.udp->local_port = espconn_port();   //номер порта клиента
+    os_printf("espconn_port: %d \r\n", pConn.proto.udp->local_port);
     pConn.proto.udp->remote_port = UDPSERVERPORT;   //номер порта сервера
     
     espconn_create(&pConn);
@@ -118,7 +140,8 @@ udp_connect() {
     os_timer_setfn(&ptimer, (os_timer_func_t *)wifi_check_ip, NULL);
     os_timer_arm(&ptimer, 1000, 0);
 
-    espconn_send(&pConn, (uint8_t*)data, strlen(data));
+    espconn_send(&pConn, (uint8_t *)&message_send, 48);
+
 }
 
 
@@ -127,9 +150,9 @@ udp_connect() {
 static void ICACHE_FLASH_ATTR 
 wifi_check_ip(void *arg){
     uint8_t wifiStatus = wifi_station_get_connect_status();
-    os_printf(" wifiStatus %d\n", wifiStatus);
+   // os_printf(" wifiStatus %d\n", wifiStatus);
     struct ip_info ipConfig;
-       
+    //os_printf("IP GOT  \n", IP2STR (&ipConfig.ip.addr));   
     if (wifiStatus == STATION_GOT_IP) 
     {
         wifi_get_ip_info(STATION_IF, &ipConfig);
@@ -142,7 +165,8 @@ wifi_check_ip(void *arg){
             return;
             }
 
-            else {os_printf("connState = WIFI_CONNECTED");}
+            else {//os_printf("connState = WIFI_CONNECTED");
+            }
         }
     }
     else
@@ -186,7 +210,34 @@ user_init(void)
     wifi_set_opmode_current(STATION_MODE);
     wifi_station_disconnect();
     wifi_station_dhcpc_stop();
-
+  
+    message_send.LIVNMODE=0b00100011; 
+    message_send.startum=0;
+    message_send.poll=0;
+    message_send.precision=0;
+    message_send.Root_Delay=0;
+    message_send.Root_Dispersion=0;
+    message_send.Ref_Identifier=0;
+    message_send.Ref_T=0;
+    message_send.Ref_Tp2=0;
+    message_send.Origin_T=0;
+    message_send.Origin_Tp2=0;
+    message_send.Receive_T=0;
+    message_send.Receive_Tp2=0;
+    message_send.T_T=0;
+    message_send.T_Tp2=0;
+  
+  
+  
+   /*
+    struct ip_info s_IP;
+    uint32_t staticIP = 0;
+    char static_IP[15] = {};
+    os_sprintf(static_IP, "%s", STATICIP);
+    staticIP = ipaddr_addr(static_IP);
+    s_IP.ip.addr = staticIP; 
+    //wifi_set_ip_info(STATION_IF, &s_IP);
+*/
     if (wifi_station_get_config(&stationConf)){
         os_memset(stationConf.ssid, 0, sizeof(stationConf.ssid));
         os_memset(stationConf.password, 0, sizeof(stationConf.password));
@@ -206,6 +257,7 @@ user_init(void)
     wifi_set_sleep_type(NONE_SLEEP_T);
     wifi_station_connect();
     wifi_station_dhcpc_start();
+    //wifi_set_ip_info(STATION_IF, &s_IP);
 
     if(wifi_get_phy_mode() != PHY_MODE_11N){
         wifi_set_phy_mode(PHY_MODE_11N);
