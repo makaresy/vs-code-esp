@@ -14,6 +14,10 @@
 		{
 			"name": "wifi_sta_udp",
 			"path": "esp8266\\wifi_sta_udp"
+		},
+		{
+			"name": "udp_esp_07",
+			"path": "esp8266\\esp07\\udp_esp_07"
 		}
 	],
 	"settings": {
