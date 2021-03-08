@@ -34,7 +34,9 @@
 			"uart_register.h": "c",
 			"i2c_master.h": "c",
 			"pwm.h": "c",
-			"espconn.h": "c"
-		}
+			"espconn.h": "c",
+			"sntp.h": "c"
+		},
+		"idf.portWin": "COM1"
 	}
 }

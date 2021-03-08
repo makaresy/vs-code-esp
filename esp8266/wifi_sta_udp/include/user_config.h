@@ -3,8 +3,8 @@
 
 #define WIFI_CLIENTSSID   "Covid-19"
 #define WIFI_CLIENTPASSWORD "375295625000"
-#define UDPSERVERIP   "35.178.87.33"
-#define UDPSERVERPORT   4000
+#define UDPSERVERIP   "132.163.96.5"
+#define UDPSERVERPORT   37
 #define STATICIP      "192.168.43.43"
 
 #endif

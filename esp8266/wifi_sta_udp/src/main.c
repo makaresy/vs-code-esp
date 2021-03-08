@@ -5,6 +5,7 @@
 #include "gpio.h"
 #include "driver/uart.h"
 #include "espconn.h"
+#include "sntp.h"
 
 #define LED     2
 #define LED_ON  0
@@ -27,21 +28,7 @@ typedef enum{               //состояния подключения
 
 struct packets
 {
-    uint8_t LIVNMODE; 
-    uint8_t startum; 
-    uint8_t poll; 
-    uint8_t precision; 
-    uint32_t Root_Delay; 
-    uint32_t Root_Dispersion; 
-    uint32_t Ref_Identifier; 
-    uint32_t Ref_T; 
-    uint32_t Ref_Tp2; 
-    uint32_t Origin_T;  
-    uint32_t Origin_Tp2; 
-    uint32_t Receive_T; 
-    uint32_t Receive_Tp2; 
-    uint32_t T_T; 
-    uint32_t T_Tp2; 
+uint32_t time 
 };
 
 struct packets message_send;
@@ -99,12 +86,13 @@ udp_client_udp_send_cb (void* arg){}
 static void ICACHE_FLASH_ATTR 
 udp_client_udp_recv_cb (void* arg, char* pusrdata, uint16_t length){
     uint16_t idx;
-    os_printf("UDP : DATA RECEIVED : LEN = %d\n", length);
-    os_printf("UDP : DATA: ");
+    //os_printf("UDP : DATA RECEIVED : LEN = %d\n", length);
+   // os_printf("UDP : DATA: ");
 
+      os_printf("dataTIME %d \r\n", pusrdata);
       for(idx = 0; idx<length; idx++)
   {
-    uart_tx_one_char(UART0, pusrdata[idx]);
+    //uart_tx_one_char(UART0, (char)pusrdata[idx]);
   }
 
    espconn_send(&pConn, (uint8_t*)"Hello from ESP8266!!!\r\n", 23);
@@ -137,10 +125,10 @@ udp_connect() {
     espconn_regist_recvcb(&pConn, udp_client_udp_recv_cb);
                                                         
 
-    os_timer_setfn(&ptimer, (os_timer_func_t *)wifi_check_ip, NULL);
-    os_timer_arm(&ptimer, 1000, 0);
+   // os_timer_setfn(&ptimer, (os_timer_func_t *)wifi_check_ip, NULL);
+   // os_timer_arm(&ptimer, 1000, 0);
 
-    espconn_send(&pConn, (uint8_t *)&message_send, 48);
+    espconn_send(&pConn, (uint8_t*)&message_send, 1);
 
 }
 
@@ -211,21 +199,8 @@ user_init(void)
     wifi_station_disconnect();
     wifi_station_dhcpc_stop();
   
-    message_send.LIVNMODE=0b00100011; 
-    message_send.startum=0;
-    message_send.poll=0;
-    message_send.precision=0;
-    message_send.Root_Delay=0;
-    message_send.Root_Dispersion=0;
-    message_send.Ref_Identifier=0;
-    message_send.Ref_T=0;
-    message_send.Ref_Tp2=0;
-    message_send.Origin_T=0;
-    message_send.Origin_Tp2=0;
-    message_send.Receive_T=0;
-    message_send.Receive_Tp2=0;
-    message_send.T_T=0;
-    message_send.T_Tp2=0;
+    message_send.time = 0; 
+
   
   
   
