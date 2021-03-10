@@ -18,6 +18,10 @@
 		{
 			"name": "udp_esp_07",
 			"path": "esp8266\\esp07\\udp_esp_07"
+		},
+		{
+			"name": "wifi_AP",
+			"path": "esp8266\\wifi_softAP\\wifi_AP"
 		}
 	],
 	"settings": {

@@ -134,7 +134,6 @@ udp_connect() {
 
 
 
-
 static void ICACHE_FLASH_ATTR 
 wifi_check_ip(void *arg){
     uint8_t wifiStatus = wifi_station_get_connect_status();
@@ -216,7 +215,7 @@ user_init(void)
     if (wifi_station_get_config(&stationConf)){
         os_memset(stationConf.ssid, 0, sizeof(stationConf.ssid));
         os_memset(stationConf.password, 0, sizeof(stationConf.password));
-        sprintf(stationConf.ssid, "%s",WIFI_CLIENTSSID);
+        sprintf(stationConf.ssid, "%s", WIFI_CLIENTSSID);
         sprintf(stationConf.password, "%s", WIFI_CLIENTPASSWORD);
     }
     
