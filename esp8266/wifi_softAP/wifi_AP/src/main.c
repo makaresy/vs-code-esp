@@ -93,14 +93,14 @@ start_wifi_AP(void){
     snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_IP_CLIENT_START);
     ip = ipaddr_addr(ip_char);
     memcpy(&dhcp_lease.start_ip, &ip, 4);
-    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_IP_CLIENT_END);
+    snprintf(ip_char , sizeof(ip_char), "%s", WIFI_AP_IP_CLIENT_END);
     ip = ipaddr_addr(ip_char);
     memcpy(&dhcp_lease.end_ip, &ip, 4);
     wifi_softap_set_dhcps_lease(&dhcp_lease);
 
 
     wifi_softap_dhcps_start();
-    wifi_set_phy_mode(PHY_MODE_11N);
+    wifi_set_phy_mode  (PHY_MODE_11N); 
 
 }
 
