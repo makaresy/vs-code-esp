@@ -1,8 +1,14 @@
 #ifndef  USER_CONFIG_H
 #define USER_CONFIG_H
 
-#define SSID "Covid_ESP"
-#define PASS "0123456789"
-#define USERNAME "COVID_ESP12"
+#define AP_SSID "Covid_ESP8266"
+#define AP_PASS "0123456789"
+
+#define WIFI_AP_IP "192.168.0.1"
+#define WIFI_AP_GW "192.168.0.1"
+#define WIFI_AP_NETMASK "255.255.255.0"
+#define WIFI_AP_IP_CLIENT_START "192.168.0.100"
+#define WIFI_AP_IP_CLIENT_END "192.168.0.105"
+
 
 #endif

@@ -55,27 +55,63 @@ user_rf_cal_sector_set(void)
     return rf_cal_sec;
 }
 
+uint32 ICACHE_FLASH_ATTR
+start_wifi_AP(void){
+
+    struct softap_config SoftApConfig;
+    struct ip_info ipinfo;
+    uint32_t ip;
+    char ip_char[15];
+    uint8_t mac_addr[6];
+    
+    wifi_set_opmode_current(STATIONAP_MODE);
+    wifi_get_macaddr(SOFTAP_IF, mac_addr);
+
+    sprintf(SoftApConfig.ssid, "%s", AP_SSID);
+    sprintf(SoftApConfig.password, "%s", AP_PASS);
+    SoftApConfig.authmode = AUTH_WPA_WPA2_PSK;
+    SoftApConfig.channel = 7;
+    SoftApConfig.max_connection = 4;
+    SoftApConfig.ssid_hidden = 0;
+    wifi_softap_set_config(&SoftApConfig);
+
+    wifi_set_sleep_type(NONE_SLEEP_T);
+    wifi_softap_dhcps_stop();
+    
+    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_IP);
+    ip = ipaddr_addr(ip_char);
+    memcpy(&ipinfo.ip, &ip, 4);
+    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_GW);
+    ip = ipaddr_addr(ip_char);
+    memcpy(&ipinfo.gw, &ip, 4);
+    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_NETMASK);
+    ip = ipaddr_addr(ip_char);
+    memcpy(&ipinfo.netmask, &ip, 4);
+    wifi_set_ip_info(SOFTAP_IF, &ipinfo);
+
+    struct dhcps_lease dhcp_lease;
+    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_IP_CLIENT_START);
+    ip = ipaddr_addr(ip_char);
+    memcpy(&dhcp_lease.start_ip, &ip, 4);
+    snprintf(ip_char, sizeof(ip_char), "%s", WIFI_AP_IP_CLIENT_END);
+    ip = ipaddr_addr(ip_char);
+    memcpy(&dhcp_lease.end_ip, &ip, 4);
+    wifi_softap_set_dhcps_lease(&dhcp_lease);
+
+
+    wifi_softap_dhcps_start();
+    wifi_set_phy_mode(PHY_MODE_11N);
+
+}
+
 void ICACHE_FLASH_ATTR 
 user_init(void)
 {
     uart_init(BIT_RATE_115200, BIT_RATE_115200);
-    
-    struct softap_config SoftApConfig;
-    os_memcpy(&SoftApConfig.ssid, SSID, os_strlen(SSID));
-    os_memcpy(&SoftApConfig.password, PASS, os_strlen(PASS));
-
-    wifi_set_opmode_current(STATIONAP_MODE);
-    wifi_station_set_username(USERNAME, os_strlen(USERNAME));
-    wifi_softap_set_config_current(&SoftApConfig);
-    //wifi_wps_disable();
-    wifi_station_connect();
     wifi_status_led_install(LED, WIFI_LED_IO_MUX, FUNC_GPIO2);
     os_timer_disarm(&ptimer);      
-    //os_timer_setfn(&ptimer, (os_timer_func_t*)wifi_check_ip, NULL); //Set timer callback function.
+    os_timer_setfn(&ptimer, (os_timer_func_t*)start_wifi_AP, NULL); //Set timer callback function.
     os_timer_arm(&ptimer, 1000, 0);   
 
-    os_printf("USER_name_strLen %d \r\n", os_strlen("COVID_ESP"));
-    os_printf("USER_name_strLen %d \r\n", sizeof("COVID_ESP"));
-    os_printf("soft_ap_config.ssid %s \r\n", &SoftApConfig.ssid);
-    os_printf("soft_ap_config.pass %s \r\n", &SoftApConfig.password);
+
 }

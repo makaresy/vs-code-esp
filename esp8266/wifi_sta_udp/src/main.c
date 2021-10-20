@@ -194,6 +194,8 @@ user_init(void)
     
     
     struct station_config stationConf;
+    
+
     wifi_set_opmode_current(STATION_MODE);
     wifi_station_disconnect();
     wifi_station_dhcpc_stop();
