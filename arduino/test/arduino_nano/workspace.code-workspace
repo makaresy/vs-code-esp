@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "arduino_nano_test1"
+		},
+		{
+			"name": "ard_nano_tesr2",
+			"path": "arduino_nano_test2\\ard_nano_tesr2"
+		}
+	],
+	"settings": {}
+}
