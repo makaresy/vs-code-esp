@@ -15,8 +15,6 @@
 static os_timer_t ptimer;
 
 
-
-
 uint32 ICACHE_FLASH_ATTR
 user_rf_cal_sector_set(void)
 {
@@ -108,7 +106,7 @@ void ICACHE_FLASH_ATTR
 user_init(void)
 {
     uart_init(BIT_RATE_115200, BIT_RATE_115200);
-    wifi_status_led_install(LED, WIFI_LED_IO_MUX, FUNC_GPIO2);
+    wifi_status_led_install(LED, WIFI_LED_IO_MUX, WIFI_LED_IO_FUNC);
     os_timer_disarm(&ptimer);      
     os_timer_setfn(&ptimer, (os_timer_func_t*)start_wifi_AP, NULL); //Set timer callback function.
     os_timer_arm(&ptimer, 1000, 0);   
