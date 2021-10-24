@@ -96,7 +96,7 @@ start_wifi_AP(void){
     memcpy(&dhcp_lease.end_ip, &ip, 4);
     wifi_softap_set_dhcps_lease(&dhcp_lease);
 
-ццц
+dddd
     wifi_softap_dhcps_start();
     wifi_set_phy_mode  (PHY_MODE_11N); 
 
