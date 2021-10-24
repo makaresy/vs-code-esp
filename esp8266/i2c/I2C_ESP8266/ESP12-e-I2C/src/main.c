@@ -2,6 +2,10 @@
 #include "user_interface.h"
 #include "driver/i2c_master.h"
 
+#define i2c_adrr    0x4e
+#define read        0x01
+#define write       0x00
+
 uint32 ICACHE_FLASH_ATTR
 user_rf_cal_sector_set(void)
 {
@@ -45,6 +49,11 @@ void ICACHE_FLASH_ATTR user_init(void)
     i2c_master_gpio_init();
     i2c_master_init();
     i2c_master_wait (100);
+
+    i2c_master_start();
+    i2c_master_writeByte(i2c_adrr | write);
+    i2c_master_checkAck();
+    i2c_master_stop();
 
    
 }
