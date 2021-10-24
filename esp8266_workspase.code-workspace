@@ -22,6 +22,10 @@
 		{
 			"name": "wifi_AP",
 			"path": "esp8266\\wifi_softAP\\wifi_AP"
+		},
+		{
+			"name": "ESP12-e-I2C",
+			"path": "esp8266\\i2c\\I2C_ESP8266\\ESP12-e-I2C"
 		}
 	],
 	"settings": {
