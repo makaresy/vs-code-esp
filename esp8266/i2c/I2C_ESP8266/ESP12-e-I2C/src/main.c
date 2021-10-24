@@ -1,5 +1,6 @@
 #include "osapi.h"
 #include "user_interface.h"
+#include "driver/i2c_master.h"
 
 uint32 ICACHE_FLASH_ATTR
 user_rf_cal_sector_set(void)
@@ -40,7 +41,10 @@ user_rf_cal_sector_set(void)
 }
 void ICACHE_FLASH_ATTR user_init(void)
 {
- 
- 
+    gpio_init();
+    i2c_master_gpio_init();
+    i2c_master_init();
+    i2c_master_wait (100);
+
    
 }
