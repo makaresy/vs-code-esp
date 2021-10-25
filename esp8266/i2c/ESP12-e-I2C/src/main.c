@@ -54,7 +54,7 @@ void ICACHE_FLASH_ATTR user_init(void)
     i2c_master_start();
     i2c_master_writeByte(I2C_PCF8574_ADR | WRITE);
     i2c_master_checkAck();
-    i2c_master_writeByte(0xFF);
+    i2c_master_writeByte(PCF_8574_LED_OFF);
      i2c_master_checkAck();
     i2c_master_stop(); 
 }
