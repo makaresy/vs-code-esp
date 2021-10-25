@@ -1,17 +1,11 @@
 #include "osapi.h"
 #include "user_interface.h"
-#include "driver/i2c_master.h" 
- 
-static os_timer_t ptimer;
- 
-/******************************************************************************
+#include "driver/i2c_master.h"
 
+#define i2c_adrr    0x4e
+#define read        0x01
+#define write       0x00
 
-
-
-
-
-*******************************************************************************/
 uint32 ICACHE_FLASH_ATTR
 user_rf_cal_sector_set(void)
 {
@@ -49,31 +43,17 @@ user_rf_cal_sector_set(void)
     }
     return rf_cal_sec;
 }
- 
- 
- 
- 
-void blinky(void *arg)
-{
-    static uint8_t state = 0;
- 
-    if (state) {
-        GPIO_OUTPUT_SET(2, 1);
-    } else {
-        GPIO_OUTPUT_SET(2, 0);
-    }
-    state ^= 1;
-
-    system_deep_sleep(10000000);
-}
- 
 void ICACHE_FLASH_ATTR user_init(void)
 {
     gpio_init();
- 
-    PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2);
- 
-    os_timer_disarm(&ptimer);
-    os_timer_setfn(&ptimer, (os_timer_func_t *)blinky, NULL);
-    os_timer_arm(&ptimer, 2000, 1);
+    i2c_master_gpio_init();
+    i2c_master_init();
+    i2c_master_wait (100);
+
+    i2c_master_start();
+    i2c_master_writeByte(i2c_adrr | write);
+    i2c_master_checkAck();
+    i2c_master_stop();
+
+   
 }
