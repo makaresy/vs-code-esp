@@ -1,10 +1,11 @@
 #include "osapi.h"
 #include "user_interface.h"
 #include "driver/i2c_master.h"
+#include "pcf8574.h"
 
-#define i2c_adrr    0x4e
-#define read        0x01
-#define write       0x00
+
+#define READ        0x01
+#define WRITE       0x00
 
 uint32 ICACHE_FLASH_ATTR
 user_rf_cal_sector_set(void)
@@ -51,9 +52,9 @@ void ICACHE_FLASH_ATTR user_init(void)
     i2c_master_wait (100);
 
     i2c_master_start();
-    i2c_master_writeByte(i2c_adrr | write);
+    i2c_master_writeByte(I2C_PCF8574_ADR | WRITE);
     i2c_master_checkAck();
-    i2c_master_stop();
-
-   
+    i2c_master_writeByte(0xFF);
+     i2c_master_checkAck();
+    i2c_master_stop(); 
 }
