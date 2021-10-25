@@ -6,6 +6,7 @@
 #include "driver/uart.h"
 #include "espconn.h"
 #include "sntp.h"
+#include "driver/i2c_master.h"
 
 #define LED     2
 
