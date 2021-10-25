@@ -29,7 +29,7 @@
 			"path": "esp8266\\i2c\\I2C_ESP8266"
 
 			"name": "ESP12-e-I2C",
-			"path": "esp8266\\i2c\\I2C_ESP8266\\ESP12-e-I2C"
+			"path": "esp8266\\i2c\\ESP12-e-I2C"
 >>>>>>> 331bb6747fe24990426577f48515d35d67d4aa1c
 		}
 	],
