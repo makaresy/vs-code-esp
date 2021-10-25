@@ -1,7 +1,66 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
-    // See http://go.microsoft.com/fwlink/?LinkId=827846
-    // for the documentation about the extensions.json format
-    "recommendations": [
-        "platformio.platformio-ide"
-    ]
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "E:/vs-code-esp/esp8266/wifi_softAP/wifi_AP/include",
+                "E:/vs-code-esp/esp8266/wifi_softAP/wifi_AP/src",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/extra_include",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/driver_lib/include",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/espressif",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip/ipv4",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip/ipv6",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/nopoll",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/ssl",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/json",
+                "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/openssl",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "E:/vs-code-esp/esp8266/wifi_softAP/wifi_AP/include",
+                    "E:/vs-code-esp/esp8266/wifi_softAP/wifi_AP/src",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/extra_include",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/driver_lib/include",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/espressif",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip/ipv4",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/lwip/ipv6",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/nopoll",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/ssl",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/json",
+                    "C:/Users/makarevich_ss/.platformio/packages/framework-esp8266-nonos-sdk/include/openssl",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50202",
+                "ESP8266",
+                "ARDUINO_ARCH_ESP8266",
+                "ARDUINO_ESP8266_ESP12",
+                "F_CPU=80000000L",
+                "__ets__",
+                "ICACHE_FLASH",
+                ""
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++11",
+            "compilerPath": "C:/Users/makarevich_ss/.platformio/packages/toolchain-xtensa/bin/xtensa-lx106-elf-gcc.exe",
+            "compilerArgs": [
+                "-mlongcalls",
+                "-mtext-section-literals",
+                ""
+            ]
+        }
+    ],
+    "version": 4
 }
