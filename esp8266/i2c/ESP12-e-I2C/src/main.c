@@ -44,17 +44,12 @@ user_rf_cal_sector_set(void)
     }
     return rf_cal_sec;
 }
-void ICACHE_FLASH_ATTR user_init(void)
-{
-    gpio_init();
-    i2c_master_gpio_init();
-    i2c_master_init();
-    i2c_master_wait (100);
 
-    i2c_master_start();
-    i2c_master_writeByte(I2C_PCF8574_ADR | WRITE);
-    i2c_master_checkAck();
-    i2c_master_writeByte(PCF_8574_LED_OFF);
-    i2c_master_checkAck();
-    i2c_master_stop(); 
+
+
+void ICACHE_FLASH_ATTR
+user_init(void)
+{
+    i2c_init ();
+    write_byte(0x25);
 }
